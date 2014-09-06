@@ -1,8 +1,10 @@
 package rumman.freemarker;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -23,46 +25,27 @@ public class GenerateProfile {
 
 		try {
 			Template template = cfg.getTemplate("profile.ftl");
-					
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("title", "profile");
-			data.put("exampleObject", new ValueHolder("properties",
-					"value"));
-
-			List<ValueHolder> systems = new ArrayList<ValueHolder>();
-			systems.add(new ValueHolder("birthcity", "newdelhi"));
-			systems.add(new ValueHolder("name", "Rumman"));
-			systems.add(new ValueHolder("qualification", "b.tech"));
-			systems.add(new ValueHolder("branch", "CSE"));
-			data.put("systems", systems);
-
-			Map<String, Object> data2 = new HashMap<String, Object>();
-			data2.put("title", "profile2");
-			data2.put("exampleObject", new ValueHolder("properties",
-					"value"));
-
-			List<ValueHolder> systems2 = new ArrayList<ValueHolder>();
-			systems2.add(new ValueHolder("birthcity", "mumbai"));
-			systems2.add(new ValueHolder("name", "Akshay"));
-			systems2.add(new ValueHolder("qualification", "B.tech"));
-			systems2.add(new ValueHolder("branch", "CSE"));
-			data2.put("systems", systems2);
-
-			Writer out = new OutputStreamWriter(System.out);
-			template.process(data, out);
-			template.process(data2, out);
-			out.flush();
-
-			Writer file1 = new FileWriter(new File("profile1.html"));
-			Writer file2 = new FileWriter(new File("profile2.html"));
-
-			template.process(data, file1);
-			template.process(data2, file2);
-			file1.flush();
-			file1.close();
-			file2.flush();
-			file2.close();
-
+			BufferedReader br = new BufferedReader(new InputStreamReader(GenerateProfile.class.getClassLoader().getResourceAsStream("profiles.csv")));
+			String[] header = br.readLine().split(",");
+			String line;
+			for (int i = 0; (line = br.readLine()) != null; i++) {
+				Map<String, Object> data = new HashMap<String, Object>();
+				List<ValueHolder> systems = new ArrayList<ValueHolder>();
+				data.put("title", "profile");
+				data.put("exampleObject", new ValueHolder("properties", "value"));
+				String[] profile = line.split(",");
+				for (int j = 0; j < header.length; j++) {
+					systems.add(new ValueHolder(header[j], profile[j]));
+				}
+				data.put("systems", systems);
+				Writer out = new OutputStreamWriter(System.out);
+				template.process(data, out);
+				out.flush();
+				Writer file = new FileWriter(new File("profile" + (i + 1) + ".html"));
+				template.process(data, file);
+				file.flush();
+				file.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (TemplateException e) {
