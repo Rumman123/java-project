@@ -30,10 +30,16 @@ public class GenerateProfile {
 					"value"));
 
 			List<ValueHolder> systems = new ArrayList<ValueHolder>();
-			systems.add(new ValueHolder("birthcity", "newdelhi"));
-			systems.add(new ValueHolder("name", "Rumman"));
-			systems.add(new ValueHolder("qualification", "b.tech"));
-			systems.add(new ValueHolder("branch", "CSE"));
+			systems.add(new ValueHolder("Name", "Rumman Khan"));
+			systems.add(new ValueHolder("Date of Birth", "22/12/1992"));
+			systems.add(new ValueHolder("Nationality", "Indian"));
+			systems.add(new ValueHolder("Gender", "Male"));
+			systems.add(new ValueHolder("Marital Status", "Single"));
+			systems.add(new ValueHolder("Languages", "English,Hindi,Urdu"));
+			systems.add(new ValueHolder("Hobbies", "Playing Cricket,Photography"));
+			systems.add(new ValueHolder("Address", "26,elgine road,Sitapur"));
+			systems.add(new ValueHolder("E:Mail", "khanrumman.khan@gmail.com"));
+			systems.add(new ValueHolder("Date", "09/09/2014"));
 			data.put("systems", systems);
 
 			Map<String, Object> data2 = new HashMap<String, Object>();

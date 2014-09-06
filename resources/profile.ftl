@@ -8,11 +8,18 @@
 <div class="container">
 ${exampleObject.name} and its ${exampleObject.value}
 </div>
-  <ul>
+  <ul class="list-unstyled">
     <#list systems as system>
-      <li>${system_index + 1}. ${system.name} : ${system.value}</li>
+      <table class="table table-bordered">
+      
+      ${system_index + 1}  ${system.name} </td> <td>${system.value}</td>
+      </tr>
+      </table>
     </#list>
   </ul>
-  <button type="button" class="btn btn-primary">Primary</button>
+  <p>
+  <button type="button" class="btn btn-primary btn-sm">EDIT</button>
+  <button type="button" class="btn btn-default btn-sm">SUBMIT</button>
+</p>
  </body>
 </Html> 
