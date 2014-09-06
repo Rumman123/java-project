@@ -12,8 +12,8 @@ ${exampleObject.name} and its ${exampleObject.value}
     <#list systems as system>
       <table class="table table-bordered">
       
-      ${system_index + 1}  ${system.name} </td> <td>${system.value}</td>
-      </tr>
+      ${system_index + 1}  ${system.name}  ${system.value}
+      
       </table>
     </#list>
   </ul>
