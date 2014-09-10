@@ -1,0 +1,30 @@
+<html ng-app="phonecatApp">
+<head>
+  ...
+  <script src="angularjs/angular-1.3.0-rc.0/angular.min.js"></script>
+  <script src="js/controllers.js"></script>
+  <title>Phone Catalog</title>
+</head>
+
+var phonecatApp = angular.module('phonecatApp', []);
+<body ng-controller="PhoneListCtrl">
+phonecatApp.controller('PhoneListCtrl', function ($scope) {
+  $scope.phones = [
+    {'name': 'Nexus S',
+     'snippet': 'Fast just got faster with Nexus S.'},
+    {'name': 'Motorola XOOM™ with Wi-Fi',
+     'snippet': 'The Next, Next Generation tablet.'},
+    {'name': 'MOTOROLA XOOM™',
+     'snippet': 'The Next, Next Generation tablet.'}
+  ];
+});
+
+  <ul>
+    <li ng-repeat="phone in phones">
+      {{phone.name}}
+      <p>{{phone.snippet}}</p>
+    </li>
+  </ul>
+
+</body>
+</html>
